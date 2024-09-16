@@ -8,6 +8,8 @@ package com.mycompany.main;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.Color;
+
 // Create a constructor method
 public class Main extends JPanel{
 public Main(){
@@ -19,7 +21,9 @@ to call it in our program, it gets called automatically
 whenever the panel needs to be redrawn, like when it is
 made visible or moved or whatever.
 */
+public static final Color BROWN = new Color(102, 51, 0);   
 public void paintComponent(Graphics g){
+
 //sky
 g.setColor(Color.cyan);
 g.fillRect(0, 0, 400, 400);
@@ -62,6 +66,38 @@ g.setColor(Color.DARK_GRAY);
     int npoints = 3;
 
     g.fillPolygon(xpoints, ypoints, npoints);
+
+//tree trunk
+g.setColor(BROWN);
+g.fillRect(50, 150, 20, 100);
+    
+//tree leaves
+g.setColor(Color.green);
+    g.fillOval(50, 150, 25, 25);
+    g.fillOval(20, 150, 25, 25);
+    g.fillOval(50, 160, 25, 25);
+    g.fillOval(65, 147, 25 ,25);
+    g.fillOval(40, 130, 25, 25);
+    g.fillOval(63, 135, 25, 25);
+    g.fillOval(63, 165, 25, 25);
+    g.fillOval(70, 150, 25, 25);
+    g.fillOval(43, 135, 25, 25);
+    g.fillOval(43, 165, 25, 25);
+    g.fillOval(30, 143, 25, 25);
+    g.fillOval(30, 158, 25, 25);
+     g.fillOval(70, 175, 25, 25);
+    g.fillOval(80, 160, 25, 25);
+    g.fillOval(48, 145, 25, 25);
+    g.fillOval(48, 175, 25, 25);
+    g.fillOval(35, 153, 25, 25);
+    g.fillOval(35, 168, 25, 25);
+
+
+
+
+
+
+
 
 
 
