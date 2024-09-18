@@ -9,16 +9,16 @@ public class StringObjects {
     public static void main(String[] args) {
     //create stirng object and print it
     String strDP = new String("Diego Pereira");
-    System.out.println("My name is " + strDP);    
+    System.out.println("'" + "My name is " + '"' + strDP + '"' + "'");    
     //length of my name
-    System.out.println("My name length is " + strDP.length());
+    System.out.println("'" + "My name length is " + '"' + strDP.length() + '"' + "'");
     //converting name into upper and lower case
-    System.out.println(strDP.toUpperCase());
-    System.out.println(strDP.toLowerCase());
+    System.out.println("'" + "My name in upper case is " + '"' + strDP.toUpperCase() + '"' + "'");
+    System.out.println("'" + "My name in lower case is" + '"' + strDP.toLowerCase()  + '"' + "'" );
     //first and last letter of my name
-    System.out.println("The first letter of my name is  " + strDP.charAt(0));
-    System.out.println("The last letter of my name is  " + strDP.charAt(strDP.length() - 1));
+    System.out.println("'" + "The first letter of my name is  " + '"' + + strDP.charAt(0) + '"' + "'");
+    System.out.println("'" + "The last letter of my name is  " + '"' + strDP.charAt(strDP.length() - 1) + '"' + "'");
     //index of the space between names
-    System.out.println("The Index of the space between my names is " + strDP.indexOf(' '));
+    System.out.println("'" + "The Index of the space between my names is " + '"' +  strDP.indexOf(' ')  + '"' + "'");
     }
 }
