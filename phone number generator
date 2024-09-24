@@ -1,0 +1,35 @@
+package com.mycompany.phonenumbergenerator;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+public class PhoneNumberGenerator {
+    //number generator, do first three seperately and then the rest in  2 groups
+         public static String generatePhoneNumber(){
+         Random random = new Random();
+         int firstDigit = random.nextInt(8);
+         int secondDigit = random.nextInt(8);
+         int thirdDigit = random.nextInt(8);
+         int secondGroup = random.nextInt(656);
+         int thirdNumber = random.nextInt(10000);
+
+    return String.format("%d%d%d-%03d-%04d", firstDigit, secondDigit, thirdDigit, secondGroup, thirdNumber);
+         }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        do{
+            System.out.println("Press \"P\" to generate number. ");
+            input = scanner.nextLine();
+
+             if(input.equalsIgnoreCase("p")){
+                    System.out.println(generatePhoneNumber());
+                 }
+        } while (input.equalsIgnoreCase("p"));
+
+         scanner.close();
+    }
+} 
