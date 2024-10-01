@@ -1,0 +1,61 @@
+package com.mycompany.mathclass;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+import java.text.*;
+import java.math.*;
+public class MathClass {
+
+    public static void main(String[] args) {
+        //generate number 0-90 and find cos, sin, and tan
+        Random random = new Random();
+            int numA = random.nextInt(91);
+                double sin = Math.sin(numA); //sine  
+                double cos = Math.cos(numA); //cosine
+                double tan = Math.tan(numA); //tangent
+                DecimalFormat df = new DecimalFormat("#.###");
+                    System.out.println("Number: " + numA + " Sine: " + df.format(sin) + " Cosine: " + df.format(cos) + " Tangent: " + df.format(tan));
+        //generate random number1.0-20.0, find area for circle with radius and volume fo phere with radius           
+        double numCircle = random.nextDouble(20.0)+1.0; 
+            double areaCircle = Math.PI * Math.pow(numCircle, 2); //area of circle
+            double volumeCircle = Math.PI * Math.pow(numCircle, 3); //volume of sphere
+                DecimalFormat nf = new DecimalFormat("#.###"); // round to three decimals
+                     System.out.println("Radius: " + nf.format(numCircle) + " Area of circle: " + nf.format(areaCircle) + " Volume of sphere: " + nf.format(volumeCircle));
+        //random real number 1000.0-100,000,000.0 find square root, natural log, and log 10
+        double numLarge = random.nextDouble(999999001.0) + 1000.0;    
+            double sqRoot = Math.sqrt(numLarge); //square root
+            double logN = Math.log(numLarge); //natural log
+            double logTen = Math.log10(numLarge); //log ten
+                DecimalFormat lf = new DecimalFormat("#.#####"); //round to five decimals
+                    System.out.println("Number: " + lf.format(numLarge) + " Square Root: " + lf.format(sqRoot) + " Natural Log: " + lf.format(logN) + " Log 10: " + lf.format(logTen));
+        //calculate energy needed to move large number
+        double c = 299792458;
+            double mass = numLarge / Math.pow(c, 2);
+            
+                System.out.println("Mass needed to move large number: " + roundAvoid(mass, 3) );
+        //Use a scanner to get a real number value and an integer input by the user. Output the value to the power of the integer, using the Math Class methods, again rounded to a user input number of decimal places.
+         Scanner scan = new Scanner(System.in); //scanner
+         String strIn = "";
+            System.out.println("Imput real number. ");
+                 double realNum = scan.nextDouble();
+            System.out.println("Imput integer");
+                int power = scan.nextInt();
+                double answer = Math.pow(realNum, power); //putting imput real number to imput power
+                    System.out.println("Answer: " + roundAvoid(answer, 3));
+         
+        
+        
+        
+        
+        
+        
+        
+    }
+    public static double roundAvoid(double value, int places) {
+        double scale = Math.pow(10, places);
+        return Math.round(value * scale) / scale;
+    }
+}
