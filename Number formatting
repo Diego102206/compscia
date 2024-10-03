@@ -1,0 +1,46 @@
+package com.mycompany.numberformatting;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+import java.text.*;
+import java.math.*;
+public class NumberFormatting {
+
+    public static void main(String[] args) {
+        //Find precent of students boys and girls
+        Scanner scan = new Scanner(System.in); //scanner
+        String strIn = "";
+            System.out.println("Imput total number fo students:");
+                double totalStudents = scan.nextDouble();
+            System.out.println("Imput number of girls: ");
+                double numGirls = scan.nextDouble();
+            System.out.println("Imput number of boys: ");    
+                double numBoys = scan.nextDouble();
+                    double perGirls = numGirls / totalStudents;//calculating percents
+                    double perBoys = numBoys / totalStudents;//calculating percents
+                         NumberFormat af = NumberFormat.getPercentInstance(); //formatting for percent
+                         System.out.println("Percent of girls: " + af.format(perGirls) + " Percent of boys: " + af.format(perBoys));
+        //money converter USD to GBP
+        System.out.println("Imput amount in dollars and cents:");
+            double dollars = scan.nextDouble();
+                dollars = dollars * .75;
+                NumberFormat bf = NumberFormat.getCurrencyInstance(Locale.UK);//formatting UK
+                System.out.println("Conversion at 1-0.75 rate USD to GBP:" + bf.format(dollars));
+        //pi to input value
+        System.out.println("Imput power: integer 0-15.");
+            int decimals = scan.nextInt();
+                String formatString = "%." + decimals + "f";//formating
+                    System.out.format("Pi: " + formatString, Math.PI);
+        //generate random number from 100,000,000 to 999e18
+        Random random = new Random();
+            double bigNum = random.nextDouble(100e19) + 100000000;//generate num
+                DecimalFormat df = new DecimalFormat("#");//format
+                System.out.println();
+                System.out.println("Big Number:"  + df.format(bigNum));
+        
+    }
+}
+
