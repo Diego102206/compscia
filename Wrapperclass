@@ -12,7 +12,7 @@ public class WrapperClass {
     public static void main(String[] args) {
         //use enum to print days of week and what day they are numericaly
         Days sun, mon, tues, wed, thurs, fri, sat;
-            sun = Days.sunday; //varaibles
+            sun = Days.sunday; //variables
             mon = Days.monday;
             tues = Days.tuesday;
             wed = Days.wednesday;
@@ -61,8 +61,8 @@ public class WrapperClass {
         String yearString = username.substring(username.length() - 4); // Extract the graduation year (last 4 characters)
             Integer graduationYear = Integer.parseInt(yearString); //parsing to int
              Integer yearAfterGraduation = graduationYear + 1; //year after grad
-            String binaryGraduationYear = Integer.toBinaryString(graduationYear); //grad yar to binary
-                System.out.println("Your graduation year is: " + graduationYear);//
+            String binaryGraduationYear = Integer.toBinaryString(graduationYear); //grad year to binary
+                System.out.println("Your graduation year is: " + graduationYear);//printing
                 System.out.println("The year after your graduation year will be: " + yearAfterGraduation);
                 System.out.println("In computer language, you graduate in: " + binaryGraduationYear);
 
