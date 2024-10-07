@@ -1,0 +1,71 @@
+package com.mycompany.wrapperclass;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+public class WrapperClass {
+
+    enum Days { num, sunday, monday, tuesday, wednesday, thursday, friday, saturday}
+    enum Months { num, january, febuary, march, april, may, june, july, august, september, october, november, december}
+    public static void main(String[] args) {
+        //use enum to print days of week and what day they are numericaly
+        Days sun, mon, tues, wed, thurs, fri, sat;
+            sun = Days.sunday; //varaibles
+            mon = Days.monday;
+            tues = Days.tuesday;
+            wed = Days.wednesday;
+            thurs = Days.thursday;
+            fri = Days.friday;
+            sat = Days.saturday;
+            System.out.println("Day: " + sun + " Number in week: " + sun.ordinal()); // printing
+            System.out.println("Day: " + mon + " Number in week: " + mon.ordinal());
+            System.out.println("Day: " + tues + " Number in week: " + tues.ordinal());
+            System.out.println("Day: " + wed + " Number in week: " + wed.ordinal());
+            System.out.println("Day: " + thurs + " Number in week: " + thurs.ordinal());
+            System.out.println("Day: " + fri + " Number in week: " + fri.ordinal());
+            System.out.println("Day: " + sat + " Number in week: " + sat.ordinal());
+            System.out.println();
+        //months in the year order
+        Months jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
+            jan = Months.january;//variables
+            feb = Months.febuary;
+            mar = Months.march;
+            apr = Months.april;
+            may = Months.may;
+            jun = Months.june;
+            jul = Months.july;
+            aug = Months.august;
+            sep = Months.september;
+            oct = Months.october;
+            nov = Months.november;
+            dec = Months.december;
+            System.out.println("Month: " + jan + " Number in year: " + jan.ordinal()); // printing
+            System.out.println("Month: " + feb + " Number in year: " + feb.ordinal());
+            System.out.println("Month: " + mar + " Number in year: " + mar.ordinal());
+            System.out.println("Month: " + apr + " Number in year: " + apr.ordinal());
+            System.out.println("Month: " + may + " Number in year: " + may.ordinal());
+            System.out.println("Month: " + jun + " Number in year: " + jun.ordinal());
+            System.out.println("Month: " + jul + " Number in year: " + jul.ordinal());
+            System.out.println("Month: " + aug + " Number in yrea: " + aug.ordinal()); // printing
+            System.out.println("Month: " + sep + " Number in year: " + sep.ordinal());
+            System.out.println("Month: " + oct + " Number in year: " + oct.ordinal());
+            System.out.println("Month: " + dec + " Number in year: " + nov.ordinal());
+            System.out.println("Month: " + nov + " Number in year: " + dec.ordinal());
+       //ask for cchs username and print it out, take the graduation yer and prit it and print graduation year in binary
+        Scanner scanner = new Scanner(System.in);
+        // Ask for the CCHS username
+        System.out.print("Enter your CCHS username: ");
+        String username = scanner.nextLine();        
+        String yearString = username.substring(username.length() - 4); // Extract the graduation year (last 4 characters)
+            Integer graduationYear = Integer.parseInt(yearString); //parsing to int
+             Integer yearAfterGraduation = graduationYear + 1; //year after grad
+            String binaryGraduationYear = Integer.toBinaryString(graduationYear); //grad yar to binary
+                System.out.println("Your graduation year is: " + graduationYear);//
+                System.out.println("The year after your graduation year will be: " + yearAfterGraduation);
+                System.out.println("In computer language, you graduate in: " + binaryGraduationYear);
+
+            
+    }
+}
