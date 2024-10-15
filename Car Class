@@ -52,7 +52,7 @@ class Car {
             result = "Car Brand: " + brand + "\n" + 
                     "Engine Power: " + enginePower + "HP\n" + 
                     "Max Speed: " + maxSpeed + "MPH\n" +
-                    "Price: $" + price ;
+                    "Price: $" + price "\n";
             
                 return result;
         }
