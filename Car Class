@@ -1,0 +1,73 @@
+package com.mycompany.carclass;
+
+//1. A class is a blueprint or template that defines the properties and behaviors that objects created from the class will have. 
+
+//2. When you pass an object to a print or println method invokes the toString() method of the object to obtain a string representation of it. 
+
+//3. In a method The scope of a variable declared within a method is limited to that method. It cannot be accessed outside the method and is created when the method is called and destroyed when it exits. variables declared in a class can have broader scopes. 
+/**
+ *
+ * @author dpereira2025
+ */
+public class CarClass {
+
+    public static void main(String[] args) {
+    Car myCar = new Car("",0,0,0); 
+    myCar.setBrand("Lexus RX 300");
+    myCar.setPrice(3000);
+    myCar.setPower(220);
+    myCar.setSpeed(135);
+    Car vwBug = new Car("VW Bug", 50, 70, 25000); //bug
+    Car toyotaPrius = new Car("Toyota Prius", 121, 112, 15500.99); //prius
+    Car bmwI8 = new Car("BMW i8", 369, 155, 80000); //I8
+    Car teslaModel3 = new Car("Tesla Model 3", 283, 162, 60000.01); //Moldel 3
+    //printing
+    System.out.println(myCar + "\n" + vwBug + "\n" + toyotaPrius + "\n" + bmwI8 + "\n" + teslaModel3);        
+    }
+ 
+ }
+
+class Car {
+    // Instance variables
+    String brand = "";
+    int enginePower = 0; // in Horse Power
+    double maxSpeed = 0; // in MPH
+    double price = 0; // in $
+    //methods to imput values
+    public void setPrice(double inPrice){
+        price = inPrice;
+    }
+    public void setSpeed(double inSpeed){
+        maxSpeed = inSpeed;
+    }
+    public void setBrand(String inBrand){
+        brand = inBrand;
+    }
+    public void setPower(int inPower){
+        enginePower = inPower;
+    }
+    
+    public String toString(){
+            String result = "test";
+            result = "Car Brand: " + brand + "\n" + 
+                    "Engine Power: " + enginePower + "HP\n" + 
+                    "Max Speed: " + maxSpeed + "MPH\n" +
+                    "Price: $" + price ;
+            
+                return result;
+        }
+    //driver method
+    public Car(String brand, int enginePower, int maxSpeed, double price ) {
+        this.brand = brand;
+        this.enginePower = enginePower;
+        this.maxSpeed = maxSpeed;
+        this.price = price;
+    }
+        
+        
+    }
+
+   
+
+
+
