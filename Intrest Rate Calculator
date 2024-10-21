@@ -1,0 +1,94 @@
+package com.mycompany.irc;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.math.*;
+import java.text.*;
+import java.util.*;        
+//to start ask for laon and months, then send it to the class to do all calculations then return to public void and print
+
+
+// Class for calculating interest and monthly payments
+class InterestRateCalculator {
+    public static final double RATE = 0.045; // Interest rate of 3.5%
+    
+    private double loan; // The original loan amount
+    private int months; // Number of months for repayment
+
+    // Method to set the principal amount
+    public void setLoan(double loan) {
+        this.loan = loan;
+    }
+    
+    // Method to set the number of months
+    public void setMonths(int months) {
+        this.months = months;
+    }
+    
+    // Method to calculate and return payment details
+    public String calculatePayments() {
+        double remainingAmount = loan;
+        double totalPaid = 0.0;
+        StringBuilder paymentDetails = new StringBuilder();
+
+        paymentDetails.append("Monthly payments breakdown:\n");
+
+        for (int month = 1; month <= months; month++) {
+            // Calculate monthly interest
+            double interestPayment = remainingAmount * RATE / 12;
+            // Calculate the current month's payment
+            double monthlyPayment = remainingAmount / (months - month + 1) + interestPayment;
+            // Update the total paid
+            totalPaid += monthlyPayment;
+
+            // Append the month's payment details to the StringBuilder
+            paymentDetails.append(String.format("Month %d: Payment = %s, Remaining Amount = %s%n",
+                    month, formatCurrency(monthlyPayment), formatCurrency(remainingAmount)));
+
+            // Deduct the portion of the payment
+            remainingAmount -= (monthlyPayment - interestPayment);
+        }
+
+        // Append total paid and original loan amount
+        paymentDetails.append(String.format("Total amount paid over %d months = %s%n", months, formatCurrency(totalPaid)));
+        paymentDetails.append(String.format("Original loan amount = %s%n", formatCurrency(loan)));
+
+        return paymentDetails.toString(); // Return the accumulated payment details
+    }
+
+    // method to format currency
+    private String formatCurrency(double amount) {
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+        return currencyFormatter.format(amount);
+    }
+}
+
+
+public class IRC {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Prompt user for input
+        System.out.print("Enter the loan amount: ");
+        double amount = scanner.nextDouble();
+        
+        System.out.print("Enter the number of months for repayment: ");
+        int months = scanner.nextInt();
+
+        // Create an instance of InterestRateCalculator
+        InterestRateCalculator calculator = new InterestRateCalculator();
+        calculator.setLoan(amount);
+        calculator.setMonths(months);
+        
+        // Calculate payments and get the results
+        String result = calculator.calculatePayments();
+        
+        // Print the results at the end
+        System.out.println(result);
+        
+        // Close scanner to prevent resource leak
+        scanner.close();
+    }
+}
