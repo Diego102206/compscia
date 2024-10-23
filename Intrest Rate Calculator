@@ -12,7 +12,7 @@ import java.util.*;
 
 // Class for calculating interest and monthly payments
 class InterestRateCalculator {
-    public static final double RATE = 0.045; // Interest rate of 3.5%
+    public static final double RATE = 0.045; // Interest rate of 4.5%
     
     private double loan; // The original loan amount
     private int months; // Number of months for repayment
