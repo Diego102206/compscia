@@ -1,0 +1,109 @@
+package com.mycompany.courseclass;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+public class CourseClass {
+    // create t=all the courses with the class use scanner and to ask for imputs of user to make new courses
+    public static void main(String[] args) {
+         Course course1 = new Course("Computer Science", "CS101", 3, "bob");
+        // Creating a course using the name-only constructor
+        Course course2 = new Course("Mathematics");
+        course2.setCode("MATH100");
+        course2.setCredits(4);
+
+        // Creating another course using the full constructor
+        Course course3 = new Course("Physics", "PHYS200", 3, "paul");
+
+        // Print details of each course
+        System.out.println(course1.toString());
+        System.out.println(course2.toString());
+        System.out.println(course3.toString()); 
+        
+                        
+             //ask for more courses
+                Scanner scan = new Scanner(System.in);
+                String input;
+        do{
+            System.out.println("If you wish to add another course press: E.");
+            input = scan.nextLine(); // scanner
+                // if to ask for more courses
+             if(input.equalsIgnoreCase("e")){
+                  System.out.println("Imput course title."); //asking for variables
+                String title = scan.nextLine(); 
+            System.out.println("Imput course code."); 
+                String code = scan.nextLine();
+            System.out.println("Imput course instructor.");
+                String instructor = scan.nextLine();
+            System.out.println("Imput total points for course.");
+                double pointsTotal = scan.nextDouble();     
+            System.out.println("n");
+                    Course newCourse = new Course(title, code, pointsTotal, instructor); // constructing object  
+                    newCourse.toString(); //to string method
+                        System.out.println(newCourse);
+                           
+                 }
+        } while (input.equalsIgnoreCase("e"));
+
+         scan.close();
+        
+
+              
+    }
+}
+class Course{ //class
+    String title; //initializing variables
+    String code;
+    double pointsTotal;
+    String instructor;
+    //method for imputing all variables at once for the object
+    public Course(String title, String code, double pointsTotal, String instructor){
+        this.title = title;
+        this.code = code;
+        this.pointsTotal = pointsTotal;
+        this.instructor = instructor;
+    }
+   
+    public String toString(){ //to string method
+            return "Course Details: \n" + "Course title: " + title + "\n" +
+                    "Course code: " + code + "\n" +
+                    "Total Points: " + pointsTotal + "\n" +
+                    "Instructor: " + instructor + "\n";
+    }
+    // methods for impting variables seperately
+    public Course(String title) {
+        this.title = title;
+    }
+
+    // Getters and Setters
+    public String getName() {
+        return title;
+    }
+
+    public void setName(String title) {
+        this.title = title;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public double getCredits() {
+        return pointsTotal;
+    }
+
+    public void setCredits(int pointsTotal) {
+        this.pointsTotal = pointsTotal;
+    }
+}
+    
+
+
+
+
