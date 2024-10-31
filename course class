@@ -10,12 +10,13 @@ public class CourseClass {
     public static void main(String[] args) {
          Course course1 = new Course("Computer Science", "CS101", 3, "bob");
         // Creating a course using the name-only constructor
-        Course course2 = new Course("Mathematics");
-        course2.setCode("MATH100");
+        Course course2 = new Course("AP Stats");
+        course2.setCode("APSTAT");
         course2.setCredits(4);
+        course2.setInstructor("Remiker");
 
         // Creating another course using the full constructor
-        Course course3 = new Course("Physics", "PHYS200", 3, "paul");
+        Course course3 = new Course("Ap Physics C", "APPHYSC", 3, "Rafie");
 
         // Print details of each course
         System.out.println(course1.toString());
@@ -100,7 +101,14 @@ class Course{ //class
 
     public void setCredits(int pointsTotal) {
         this.pointsTotal = pointsTotal;
+
     }
+    public String getInstructor() {
+        return instructor;
+    }
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+
 }
     
 
