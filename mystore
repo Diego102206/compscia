@@ -1,0 +1,130 @@
+package com.mycompany.mystore;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+import java.math.*;
+import java.text.*;
+public class MyStore {
+//create class that imputs values for item objects then in the class create methods that output the prices as the user imputs items. 
+    public static void main(String[] args) {
+        double MAX_BUDGET = 250.00;//initialize scanner and variable
+        double total = 0;
+        double bRemain = 250;
+        Scanner scan = new Scanner(System.in);
+        Item shirt = new Item("TShirt", 29.99); // create all objects
+        Item shoes = new Item("Shoes", 125.99);
+        Item hat = new Item("Hat", 25.99);
+        Item shorts = new Item("Shorts", 75.99);
+        Item blouse = new Item("Blouse", 89.99);
+        Item jacket = new Item("Jacket", 250.00);
+        Item jeans = new Item("Jeans", 60.99);
+        System.out.println("Welcome to the store! \n Your budet is: $" + MAX_BUDGET + "\n press A for a list of items , press anything else to stert imputing items");
+        String imput1;
+        imput1= scan.nextLine();
+
+            if(imput1.equalsIgnoreCase("a")){
+                System.out.println(shirt.toString() + "\n" + 
+                        shoes.toString() + "\n" + 
+                        hat.toString() + "\n" + 
+                        shorts.toString() + "\n" + 
+                        blouse.toString() + "\n" + 
+                        jacket.toString() + "\n" +
+                        jeans.toString() + "\n");
+                  
+            }  
+            StringBuilder cart = new StringBuilder();
+
+            cart.append("Cart:\n");
+         while (true) {
+            System.out.println("Imput Item you wish to add to cart. Press c to check cart.");
+            String imput2 = scan.nextLine();
+            if (total > MAX_BUDGET){
+                System.out.println("Budget exceeded!");
+            }
+            else if (imput2.equalsIgnoreCase("shorts")) {
+                cart.append(shorts.toString() + "\n");
+                total = total + shorts.getPrice();
+                 bRemain = bRemain - shorts.getPrice();
+                System.out.println("Budget remaining: " + bRemain + "\n");
+            }
+            else if (imput2.equalsIgnoreCase("tshirt")) {
+                cart.append(shirt.toString() + "\n");
+                total = total + shirt.getPrice();
+                bRemain = bRemain - shirt.getPrice();
+                System.out.println("Budget remaining: " + bRemain + "\n");
+            }
+            else if (imput2.equalsIgnoreCase("shoes")) {
+                cart.append(shoes.toString() + "\n");
+                total = total + shoes.getPrice();
+                 bRemain = bRemain - shoes.getPrice();
+                System.out.println("Budget remaining: " + bRemain + "\n");
+            }
+            else if (imput2.equalsIgnoreCase("hat")) {
+                cart.append(hat.toString() + "\n");
+                total = total + hat.getPrice();
+                 bRemain = bRemain - hat.getPrice();
+                System.out.println("Budget remaining: " + bRemain + "\n");
+            }
+            else if (imput2.equalsIgnoreCase("blouse")) {
+                cart.append(blouse.toString() + "\n");
+                total = total + blouse.getPrice();
+                bRemain = bRemain - blouse.getPrice();
+                System.out.println("Budget remaining: " + bRemain + "\n");
+            }
+            else if (imput2.equalsIgnoreCase("jacket")) {
+                cart.append(jacket.toString() + "\n");
+                total = total + jacket.getPrice();
+                bRemain = bRemain - jacket.getPrice();
+                System.out.println("Budget remaining: " + bRemain + "\n");
+            }
+            else if (imput2.equalsIgnoreCase("jeans")) {
+                cart.append(jeans.toString() + "\n");
+                total = total + jeans.getPrice();
+                bRemain = bRemain - jeans.getPrice();
+                System.out.println("Budget remaining: " + bRemain + "\n");
+            }
+            
+            else if (imput2.equalsIgnoreCase("c")){
+                System.out.println(cart);
+            }
+         }
+    }
+}
+class Item{//create class, variables, getters, and setters
+    String name;
+    double price;
+    
+    public void setName(String name){
+        this.name = name;
+    }
+    
+    public void setPrice(double price){
+        this.price = price;
+    }
+    
+    public double getPrice(){
+        return price;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public Item(String name,  double price){
+        this.name = name;
+        this.price = price;
+        
+    }
+    
+    public String toString(){
+        return "Item: " + name + ", Price: $" + price;
+    }
+    
+    public void Cart(){
+        double total = 0;
+        total = price;
+    }
+}
