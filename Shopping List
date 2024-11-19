@@ -1,0 +1,32 @@
+package com.mycompany.shoppinglist;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+public class ShoppingList {
+
+    public static void main(String[] args) {
+        ArrayList sL = new ArrayList();
+        String imput = "";
+        String output = "";
+        while(true){
+        Scanner s = new Scanner(System.in);
+        System.out.println("Imput shopping list items.");
+        imput = s.nextLine();
+        sL.add(imput);
+        int i = 0;
+        while(i < sL.size()){
+            System.out.println((i + 1) + " " + sL.get(i));
+            i++;
+        }
+        System.out.println("Do you want to remove anything?");
+        output = s.nextLine();
+        sL.remove(output);
+        }
+        
+        
+        
+    }
+}
