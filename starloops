@@ -1,0 +1,63 @@
+package com.mycompany.starloops;
+
+/**
+ *
+ * @author dpereira2025
+ */
+public class StarLoops {
+
+    public static void main(String[] args) {  
+    System.out.println("a.");//part a  
+        for (int row = 10; row > 0; row--) { //rows
+            for (int bow = 0; bow < row; bow++) { //loop for stars
+                System.out.print("*");
+            }
+            System.out.println(); //next line
+        } 
+    System.out.println("b.");//part b
+        for (int low = 1; low <= 10; low++) { //rows
+            for (int how = 1; how <= 10 - low; how++) { //loop for spaces
+                System.out.print(" ");
+            }
+            for (int sow = 1; sow <= low; sow++) { //loop for stars
+                System.out.print("*");
+            }
+            System.out.println(); //next line
+        }
+    
+    System.out.println("c.");//part c
+         for (int wow = 0; wow < 10; wow++) { //rows
+            for (int gow = 0; gow < wow; gow++) { //loop for leading spaces
+                System.out.print(" ");
+            }
+            for (int now = 10; now > wow; now--) { //loop for stars
+                System.out.print("*");
+            }
+            System.out.println(); //next line
+        }
+    System.out.println("d.");//part d
+     int rows = 5;
+
+        //upper half
+        for (int mow = 1; mow <= rows; mow++) { //rows
+            for (int pow = rows - mow; pow > 0; pow--) { //loop for spaces
+                System.out.print(" ");
+            }
+            for (int vow = 1; vow <= (2 * mow - 1); vow++) { //loop for stars
+                System.out.print("*");
+            }
+            System.out.println(); //next line
+        }
+
+        //lower half 
+        for (int low = rows; low >= 1; low--) { //rows
+            for (int pow = rows - low; pow > 0; pow--) { //loop for spaces
+                System.out.print(" ");
+            }
+            for (int tow = 1; tow <= (2 * low - 1); tow++) { //loop for stars
+                System.out.print("*");
+            }
+            System.out.println(); //next line
+        }
+    }    
+}
