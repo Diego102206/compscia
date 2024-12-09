@@ -14,7 +14,7 @@ add fights against enemy
 *use random generators to generate dammage and healing numbers
 *use loop to ensure fight reaches it's end 
 add different weapons you can choose
-*weapons have different attack multipliers that change player damage and in one case enemy dammage
+*weapons have different attack multipliers that change player damage and in one case enemy damage
 */
 import java.util.*;
 public class FinalGame {
