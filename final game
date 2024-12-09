@@ -5,9 +5,16 @@ package com.mycompany.finalgame;
  * @author dpereira2025
  */
 /*
-create rpg
-add fights against enemies 
-add different weapns you can pick up
+create fighting game
+*inputs from player are used
+use classes to create player and enemy obects
+*objets store health and damage for enemy and player
+add fights against enemy 
+*fights include healing and attack actions that change health of both player and enemy
+*use random generators to generate dammage and healing numbers
+*use loop to ensure fight reaches it's end 
+add different weapons you can choose
+*weapons have different attack multipliers that change player damage and in one case enemy dammage
 */
 import java.util.*;
 public class FinalGame {
@@ -19,44 +26,65 @@ public class FinalGame {
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to the game!");
             Player player = new Player(0,100); //create classes
-            Enemy enemy = new Enemy(0,100);            
+            Enemy enemy = new Enemy(0,100); 
+            //damage multipiers for the weapons
                 int mSwordDam = 10;
                 int mSpearDam = 20;
                 int mDaggerDam = 20;  
-                int dam;
+                int dam;   
+                String g = "e";
                 // use loop to make sure imput is correct
-                while (player.getDamage() == 0) {
+                while (g.equalsIgnoreCase("e")) {
+                    //ask for weapon choice and calculate initial damage value then set the to the classes
                     System.out.println("Input weapon name to choose your weapon. \n Sword, most consistent damage \n Dagger, does more damage but the enemy does more damage aswell \n Spear, larger range of damage, could do a little or could do a lot ");
                     String input1 = scan.nextLine();
-                   
+                   //for dagger
                     if (input1.equalsIgnoreCase("dagger")){
                         dam = random.nextInt(mDaggerDam)+10;
-                        int enemyDam = random.nextInt(20)+ 100;
+                        int enemyDam = random.nextInt(20)+ 10;
                         player.setDamage(dam);
                         enemy.setDamage(enemyDam);
-                        
+                        g ="d";
+                   //for sword     
                     } else if (input1.equalsIgnoreCase("sword")) {
                         dam = random.nextInt(mSwordDam)+10;
                         player.setDamage(dam);
+                        g ="d";
+                   //for spear
                     } else if (input1.equalsIgnoreCase("Spear")) {
                         dam = random.nextInt(mSpearDam)+1;
                         player.setDamage(dam);
+                        g ="d";
+                    } else if (input1.equalsIgnoreCase("Gun")) {
+                        dam = 100;
+                        player.setDamage(dam);
+                        g ="d";    
+                   //if incorrect input
                     } else {
                         System.out.println("please input one of the given weapons.");
                     }
                 } 
-                System.out.println("You are faced with an enemy!");
+                //loop for battle 
+                System.out.println("\n You are faced with an enemy!");
                 while (player.getHealth() > 0 && enemy.getHealth() > 0){
-                System.out.println("He has " + enemy.getHealth()+ " health points." +
-                                "\n You have" + player.getHealth()+ " health points." + "\n What do you want to do? \n Attack, you and your enemy dammage each other \n Heal, you and your enemy heal" );   
+                System.out.println("\n He has " + enemy.getHealth()+ " health points." +
+                                "\n You have " + player.getHealth()+ " health points." + "\n What do you want to do? \n Attack, you and your enemy damage each other \n Heal, you and your enemy heal (random number 0-10) \n" );   
                     String input2 = scan.nextLine();
+                    //attack if statement, change health by using the damage of the other
                         if (input2.equalsIgnoreCase("Attack")) {
-                            
+                            enemy.setHealth(enemy.getHealth() - player.getDamage());
+                            player.setHealth(player.getHealth() - enemy.getDamage());
+                    //heal if statement, change health by healing random number
                         } else if (input2.equalsIgnoreCase("Heal")) {
-                            
-                        }
-                
-                    
+                            enemy.setHealth(enemy.getHealth() + random.nextInt(20));
+                            player.setHealth(player.getHealth() + random.nextInt(20));
+                        }                                 
+                }
+                //win and loss statemnts
+                if (player.getHealth() <= 0){
+                    System.out.println("You were DEFEATED!! :( ");
+                } else if (enemy.getHealth() <= 0){
+                    System.out.println("You WON!! :) ");
                 }
     }
                     
@@ -64,17 +92,20 @@ public class FinalGame {
 }
 class Player{ //create player class for health and damage
     int damage;
-    int health;   
-    
+    int health;  
+    //random generator for damage
+    Random random = new Random();
+    //object creator
     public Player(int damage, int health){
         this.damage = damage;
         this.health = health;
     }
+    //setters and getters
     public void setDamage(int damage){
         this.damage = damage;
     }
     public int getDamage(){
-        return damage;
+        return damage + random.nextInt(10);
     }
     public void setHealth(int health){
         this.health = health;
@@ -83,19 +114,26 @@ class Player{ //create player class for health and damage
         return health;
     }
     
+        
+    
+    
 }
 class Enemy{ //create enemy class with health and damage
     int damage;
     int health; 
+    //random generator for damage
+    Random random = new Random();
+    //object creator
     public Enemy(int damage, int health){
         this.damage = damage;
         this.health = health;
     }
+    //setters and getters
     public void setDamage(int damage){
         this.damage = damage;
     }
     public int getDamage(){
-        return damage;
+        return damage + random.nextInt(40);
     }
     public void setHealth(int health){
         this.health = health;
