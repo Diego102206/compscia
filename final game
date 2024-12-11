@@ -11,7 +11,7 @@ use classes to create player and enemy obects
 *objets store health and damage for enemy and player
 add fights against enemy 
 *fights include healing and attack actions that change health of both player and enemy
-*use random generators to generate dammage and healing numbers
+*use random generators to generate damage and healing numbers
 *use loop to ensure fight reaches it's end 
 add different weapons you can choose
 *weapons have different attack multipliers that change player damage and in one case enemy damage
@@ -78,7 +78,14 @@ public class FinalGame {
                         } else if (input2.equalsIgnoreCase("Heal")) {
                             enemy.setHealth(enemy.getHealth() + random.nextInt(20));
                             player.setHealth(player.getHealth() + random.nextInt(20));
-                        }                                 
+                        }  
+                        if (player.getHealth() >= 200) {
+                            System.out.println("You can't heal all day! "
+                            + "\nGod strikes you down with a bolt of lighting!!"
+                            + "\n x x "
+                            + "\n ---");
+                            player.setHealth(0);                   
+                        }
                 }
                 //win and loss statements
                 if (player.getHealth() <= 0){
