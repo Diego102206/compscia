@@ -140,7 +140,7 @@ class Enemy{ //create enemy class with health and damage
         this.damage = damage;
     }
     public int getDamage(){
-        return damage + random.nextInt(40);
+        return damage + random.nextInt(30);
     }
     public void setHealth(int health){
         this.health = health;
