@@ -25,7 +25,7 @@ public class FinalGame {
         //scanner for user imput
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to the game!");
-            Player player = new Player(0,100); //create classes
+            Player player = new Player(0,100); //create player and enemy objects
             Enemy enemy = new Enemy(0,100); 
             //damage multipiers for the weapons
                 int mSwordDam = 10;
