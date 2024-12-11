@@ -80,7 +80,7 @@ public class FinalGame {
                             player.setHealth(player.getHealth() + random.nextInt(20));
                         }                                 
                 }
-                //win and loss statemnts
+                //win and loss statements
                 if (player.getHealth() <= 0){
                     System.out.println("You were DEFEATED!! :( ");
                 } else if (enemy.getHealth() <= 0){
