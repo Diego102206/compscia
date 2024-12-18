@@ -5,7 +5,7 @@ package com.mycompany.unit4test;
  * @author dpereira2025
  * Use class to create card objects and then put these objects onto a string using a string builder.
  * random numbers will be used to get random values and suits
- * Since I wasn't able to get the highest card and the not overlapping cards, if I had more time i might have tied doing an array list instead so that I could access all of the things and not have them all stuck in one big string
+ * Since I wasn't able to get the highest card and the not overlapping cards, if I had more time i would have tried doing an array list instead so that I could access all of the things and not have them all stuck in one big string but I ran out of time to change everything
  */
 import java.util.*;
 public class Unit4Test {
