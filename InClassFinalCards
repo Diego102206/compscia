@@ -1,0 +1,62 @@
+package com.mycompany.unit4test;
+
+/**
+ *
+ * @author dpereira2025
+ * Use class to create card objects and then put these objects onto a string using a string builder.
+ * random numbers will be used to get random values and suits
+ * Since I wasn't able to get the highest card and the not overlapping cards, if I had more time i might have tied doing an array list instead so that I could access all of the things and not have them all stuck in one big string
+ */
+import java.util.*;
+public class Unit4Test {
+    
+    public static void main(String[] args) {
+        StringBuilder hand = new StringBuilder(); //string builder
+        Random r = new Random(); //random generator
+        int cards = 0; 
+        //while statemtnt for producing 5 cards
+            while (cards < 5){
+                cards++;
+                String suit = null;
+                int suitNum = r.nextInt(4) + 1;
+                switch (suitNum) { //switch to turn random numbers into suit strings
+            case 1:
+                suit = "Clubs";
+                break;
+            case 2:
+                suit = "Hearts";
+                break;
+            case 3:
+                suit = "Spades";
+                break;
+            case 4:
+                suit = "Diamonds";
+                break;
+            default:
+                break;
+                }
+                Card newCard = new Card(suit,r.nextInt(13) + 1);
+                //appending string to add card
+                hand.append("Value: " + newCard.getVal() + " Suit: " + newCard.getSuit() + "\n");
+            } 
+            //printing 
+                System.out.println("Your hand:\n" + hand);
+    }
+}
+class Card{//card class
+    String suit = "n";
+    int valFace ;
+    int suitNum ;
+    //creator
+        public Card(String suit, int valFace){
+        this.suit = suit;
+        this.valFace = valFace;
+    }
+    //getters
+    public String getSuit(){
+        return suit;
+    }
+    public int getVal(){
+        return valFace;
+    }
+}
