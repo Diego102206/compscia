@@ -58,7 +58,7 @@ class Task implements Complexity, Priority, Comparable<Task>{
     }
     //to string to display tasks
     public String toString(){
-        return "Task: name= " + name + " priority= "+ priority + " complexity= " + complexity ;
+        return "Task: name= " + name + " priority= "+ priority + " complexity= " + complexity + "\n";
     }
     // compareTo which compares priority and then comlexity
     public int compareTo(Task other){
