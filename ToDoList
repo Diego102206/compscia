@@ -1,0 +1,83 @@
+package com.mycompany.todolist;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+public class ToDoList {
+
+    public static void main(String[] args) {
+        //array list for tasks
+        ArrayList<Task> tasks = new ArrayList<>();
+            tasks.add(new Task("cleaning", 2, 2 ));//adding tasks
+            tasks.add(new Task("wash clothes", 4, 6));
+            tasks.add(new Task("wash car", 6, 9 ));
+            tasks.add(new Task("do dishes", 7, 8 ));
+                //printing tasks before sort                     
+                System.out.println("tasks: ");            
+                    System.out.println(tasks);
+              
+                Collections.sort(tasks);//sorting tasks
+                //printing tasks after sort
+                System.out.println("tasks after sorting");                   
+                    System.out.println(tasks);
+            
+        
+    }   
+       
+}
+//set up task class with implements
+class Task implements Complexity, Priority, Comparable<Task>{
+    int complexity;
+    int priority;
+    String name;
+    // constructor and getters and setters for varables
+    public Task( String name, int complexity, int priority){
+        this.name = name;
+        setComplexity(complexity);
+        setPriority(priority);
+        
+    
+    }
+    
+    public void setComplexity(int complexity){
+        this.complexity = complexity;
+    }
+    
+    public int getComplexity(){
+        return complexity;
+    }
+    
+    public void setPriority(int priority){
+        this.priority = priority;
+    }
+    
+    public int getPriority(){
+        return priority;
+    }
+    //to string to display tasks
+    public String toString(){
+        return "Task: name= " + name + " priority= "+ priority + " complexity= " + complexity ;
+    }
+    // compareTo which compares priority and then comlexity
+    public int compareTo(Task other){
+    if( this.priority != other.priority) {
+        return Integer.compare(this.priority, other.priority);
+    }
+    return Integer.compare(this.complexity, other.complexity);
+   
+        
+    }
+} 
+//complexity interface
+interface Complexity{
+    public void setComplexity(int complexity);
+    public int getComplexity();
+}
+//priority interface
+interface Priority{
+    public void setPriority(int priority);
+    public int getPriority(); 
+}
+
