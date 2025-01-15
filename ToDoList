@@ -1,8 +1,11 @@
 package com.mycompany.todolist;
 
-/**
- *
- * @author dpereira2025
+/*
+Create task class that implemets the intefaces: complexity, priority, and comparable 
+in order to take the priority and complexiy values, compare them and set the list up in a way that higher priority and complexity tasks go first.
+create an array list that includes the objects from the task class.
+using collections, sort the arrray list by the values of priority then complexity.
+
  */
 import java.util.*;
 public class ToDoList {
