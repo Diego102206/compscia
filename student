@@ -1,0 +1,66 @@
+package com.mycompany.student;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+public class Student {
+    private String firstName, lastName;
+    private List<Course> courses;
+    public Student(){
+    firstName = "";
+    lastName = "";
+    
+    
+    
+    }
+    public Student(String first, String last){
+    this.firstName = first;
+    this.lastName = last;
+    this.courses = new ArrayList<>();
+    initializeCourses();
+    }
+    private void initializeCourses(){
+        courses.add(new Course("Math", 0));
+        courses.add(new Course("English", 0));
+        courses.add(new Course("Art", 0));
+    }
+    public String toString(){
+    String result;
+    result = firstName + " " + lastName + "\n" + "Courses: \n" + courses;
+    
+    return result;
+    }
+    
+    
+    
+    
+    
+    public static void main(String[] args) {
+        Student studOne = new Student("Bob", "Bobbert");
+        Student studTwo = new Student("Joe", "Tortuga");
+        Student studThree = new Student("Paul", "Harris");
+        System.out.println(studOne.toString());
+    }
+}
+class Course{
+    int testS;
+    String cName;
+    public Course(String cName, int testS){
+        this.cName = cName;
+        this.testS = testS;
+    }
+    public void setTestScore(int test){
+        this.testS = test;
+    }
+    public int getTestScore(){
+        return testS;
+    }
+    public void setCourseName(String cName){
+        this.cName = cName;
+    }
+    public String getCourseName(){
+        return cName;
+    }
+}
