@@ -1,60 +1,98 @@
 package com.mycompany.student;
 
 /**
- *
- * @author dpereira2025
+ use public class as student class, and create course class for use in student class
+ use an array list to set up the courses on the creation of a student object
+  
  */
+
 import java.util.*;
 public class Student {
+    //initialize variables and arra list for courses
     private String firstName, lastName;
     private List<Course> courses;
     public Student(){
     firstName = "";
-    lastName = "";
-    
-    
-    
+    lastName = "";    
     }
+    //Constructor for student
     public Student(String first, String last){
     this.firstName = first;
     this.lastName = last;
     this.courses = new ArrayList<>();
     initializeCourses();
     }
+    //method to initialize courses when student is made
     private void initializeCourses(){
         courses.add(new Course("Math", 0));
         courses.add(new Course("English", 0));
         courses.add(new Course("Art", 0));
     }
-    public String toString(){
-    String result;
-    result = firstName + " " + lastName + "\n" + "Courses: \n" + courses;
-    
-    return result;
+    //method to set test score
+    public void setTestScore(String courseName, double score){
+        for ( Course course : courses) {
+            if (course.getCourseName().equalsIgnoreCase(courseName)){
+                course.setTestScore(score);
+                return;
+            }
+        }
     }
-    
-    
-    
-    
-    
+    //method to get test score
+    public double getTestScore(String courseName) {
+        for (Course course : courses) {
+            if (course.getCourseName().equalsIgnoreCase(courseName)){
+                return course.getTestScore();
+            }
+        }
+        System.out.println("Course not found");
+        return -1;
+    }
+    //method to get average test score
+    public double getAverage(){
+        double total = 0;
+        for (Course course : courses){ 
+            total += course.getTestScore();
+        }
+        return total / courses.size();
+    }
+    //to string method
+    public String toString(){
+       StringBuilder t = new StringBuilder("Student Name: " + firstName + " " + lastName + "\nCourses:\n");
+       for(Course course : courses) { 
+           t.append(course.toString()).append("\n");
+       }
+       return t.toString();
+    }
+       
     public static void main(String[] args) {
+        //creating student object
         Student studOne = new Student("Bob", "Bobbert");
-        Student studTwo = new Student("Joe", "Tortuga");
-        Student studThree = new Student("Paul", "Harris");
+        //printing student
         System.out.println(studOne.toString());
+        //changing test scores
+        studOne.setTestScore("Math", 45);
+        studOne.setTestScore("English", 79);
+        studOne.setTestScore("Art", 100);
+        System.out.println(studOne.toString());
+        //using average method
+        System.out.println(studOne.getAverage());              
     }
 }
+
+//course class
 class Course{
-    int testS;
+    double testS;
     String cName;
-    public Course(String cName, int testS){
+    //constructor
+    public Course(String cName, double testS){
         this.cName = cName;
         this.testS = testS;
     }
-    public void setTestScore(int test){
+    //getters and setters for name and test score
+    public void setTestScore(double test){
         this.testS = test;
     }
-    public int getTestScore(){
+    public double getTestScore(){
         return testS;
     }
     public void setCourseName(String cName){
@@ -63,4 +101,12 @@ class Course{
     public String getCourseName(){
         return cName;
     }
+    //to string for courses
+    public String toString(){
+    String result;
+    result = "Course: " + cName + " Test Score: "  + testS;
+    
+    return result;
+    }
+    
 }
