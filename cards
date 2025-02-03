@@ -11,7 +11,7 @@ public class CardGame {
         // Create the deck as a list of strings
         List<String> deck = new ArrayList<>();
         
-        // Populate the deck with 52 cards
+        // make the deck with 52 cards
         for (String suit : suits) {
             for (String rank : ranks) {
                 deck.add(rank + " of " + suit);
