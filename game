@@ -1,0 +1,72 @@
+package com.mycompany.fortnite;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+public class Fortnite {
+
+    public static void main(String[] args) {
+       System.out.println("Welcome to Fortnite!\nIn this game you have to land, loot, and survive the seven circles, fighting your way to survive");
+       Weapon Scar = new Weapon("Legendary", 30, 40);
+       Weapon Pninety = new Weapon("Legendary", 20, 50);
+       Weapon Sniper = new Weapon("Rare", 200, 5);
+       Weapon Zapatron = new Weapon("Mythic", 250, 100);
+       Weapon PumpShotgun = new Weapon("Rare", 150, 25);
+       Weapon Smg = new Weapon("Rare", 200, 5);
+   
+    
+    
+    
+    }
+}
+class Item{
+    String rarity = "";
+    String[] rars = {"common", "uncommon", "rare", "epic", "legendary", "mythic"};
+    public Item (String inRarity){
+        Random r = new Random();
+        rarity = rars[r.nextInt(4)];
+    }   
+    public String getRarity(){
+        return rarity;
+    }
+    public void setBrandName(String inRarity){
+        rarity = inRarity;
+    }
+}
+class Weapon extends Item{
+    int damage = 0;
+    int accuracy = 0;
+    public Weapon(String inRarity, int inDamage, int inAccuracy){
+            super(inRarity);
+            damage = inDamage;
+            accuracy = inAccuracy;
+                    }
+    public int getDamage(){
+        return damage;
+    }
+    public void setDamage(int inDamage){
+        damage = inDamage;
+    }
+     public int getAccuracy(){
+        return accuracy;
+    }
+    public void setAccuracy(int inAccuracy){
+        accuracy = inAccuracy;
+    }
+    public toString
+}
+
+class Heal extends Item{
+    int healing; 
+    int shield;   
+    public Heal(String inRarity, int inHealing, int inShield){
+            super(inRarity);
+            healing = inHealing;
+            shield = inShield;
+                    }
+}
+class Players{
+    
+}
