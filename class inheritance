@@ -1,0 +1,401 @@
+package com.mycompany.classinheritance;
+
+/**
+create classes from the base vehicle and car class
+
+ */
+public class ClassInheritance {
+
+    public static void main(String[] args) {
+        AmphibiousCar bob = new  AmphibiousCar("joe", 130, 2, 4, 18, 4);
+        bob.setWaterMode(true);    
+        System.out.println(bob.toString());
+    }
+}
+// The Base Vehicle Class, implements the Speedometer interface
+class Vehicle implements Speedometer{
+    //base (Class wide) variables
+    protected String brandName = "";
+    protected double speed = 0.0;
+    protected int passengers = 0;
+    protected double cargoWeight = 0.0;
+    //Base default constructor
+    public Vehicle(){
+    brandName = "";
+    speed = 0.0;
+    passengers = 0;
+    cargoWeight = 0.0;
+    }
+    public Vehicle(String inBrand, double inSpeed, int inPassengers, double
+    inCargo){
+        brandName = inBrand;
+        speed = inSpeed;
+        passengers = inPassengers;
+        cargoWeight = inCargo;
+    }
+    //getters and setters
+    public Vehicle(String inBrand){
+        brandName = inBrand;
+    }
+    public String getBrand(){
+        return brandName;
+    }
+    public void setBrandName(String inBrand){
+        brandName = inBrand;
+    }
+    public double getSpeed(){
+        return speed;
+    }
+    public void setSpeed(double inSpeed){
+        speed = inSpeed;
+    }
+    public int getPassengers(){
+        return passengers;
+    }
+    public void setPassengers(int inPassengers){
+        speed = inPassengers;
+    }
+    public double getCargoWeight(){
+        return cargoWeight;
+    }
+    public void setCargoWeight(double inCargoWeight){
+        cargoWeight = inCargoWeight;
+    }
+    //Base toString
+    public String toString(){
+    String result = "";
+        result = "Brand: \t\t" + getBrand() + "\n" +
+        "Speed (mph): \t" + getSpeed() + "\n" +
+        "Passengers: \t" + getPassengers() + "\n" +
+        "Cargo (lbs): \t" + getCargoWeight() + "\n";
+    return result;
+    }
+}
+//the Speedometer interface to show the speed of any vehicle in the same way
+interface Speedometer{
+    public void setSpeed(double inSpeed);
+    public double getSpeed();
+}
+// Car Class inherits from Vehicle Class
+class Car extends Vehicle{
+    int wheels = 4;
+    String color = "White";
+    boolean spoiler = false;
+    boolean stereo = false;
+    double mpg = 0.0; //has an extra variable, mpg
+    public Car(String inBrand, double inSpeed, int inPassengers, double inCargo,
+    double inMPG){
+        super(inBrand, inSpeed, inPassengers, inCargo); //uses the super constructor
+        mpg = inMPG; //also include the extra variable in the Car constructor
+    }
+    public boolean getSpoiler(){
+        return spoiler;
+    }
+    //another additional variable
+    public void setStereo(boolean inStereo){
+        stereo = inStereo;
+    }
+    public boolean getStereo(){
+        return stereo;
+    }
+    //overrides the super getSpeed method
+    @Override
+    public double getSpeed() {
+        if (spoiler)
+            return super.getSpeed() + 20;
+        else
+            return super.getSpeed();
+    }
+    public void setMpg(double mpg) {
+        this.mpg = mpg;
+    }
+    public double getMPG(){
+    if(stereo)
+        return mpg - (mpg / 10);
+    else
+        return mpg;
+    }
+    //usesd the super toString, as well as addingnthe new variable to it.
+    public String toString(){
+        String result = super.toString() +
+            "MPG :\t\t" + this.getMPG();
+    return result ;
+    }
+}
+//amphibious car class extends car
+class AmphibiousCar extends Car {
+    //new booleans
+    Boolean waterMode = false;
+    Boolean sleekHull = false;
+    int propellers = 2; // new variable propellers    
+    public AmphibiousCar(String inBrand, double inSpeed, int inPassengers, double inCargo,
+    double inMPG, int inPropellers){
+        super(inBrand, inSpeed, inPassengers, inCargo, inMPG); //uses the super constructor       
+        propellers = inPropellers;  //also include the extra variable in the AmphibiousCar constructor
+    }
+     public void setWaterMode(boolean inWaterMode){
+        waterMode = inWaterMode;
+    }
+      public boolean getWaterMode(){
+        return waterMode;
+    }
+    public void setSleekHull(boolean inSleekHull){
+        sleekHull = inSleekHull;
+    }
+      public boolean getSleekHull(){
+        return sleekHull;
+    }
+    @Override
+    public double getSpeed() {
+        if (waterMode)
+            return super.getSpeed() -50;
+        else
+            return super.getSpeed();
+    }
+    public void setPropellers(int propellers) {
+        this.propellers = propellers;
+    }
+    public int getPropellers() {
+        if (waterMode)
+            return propellers;
+        else
+            return 0;
+    }
+    public double getMPG(){
+    if(sleekHull)
+        return mpg ;
+    else
+        return mpg - (mpg / 10);
+    }
+    //usesd the super toString, as well as addingnthe new variable to it.
+    public String toString(){
+        String result = super.toString() +
+            "\nPropellers :\t" + this.getPropellers() + 
+                "\nWater Mode :\t" + (waterMode ? "Yes" : "No") + 
+                "\nSleek Hull : \t" + (sleekHull ? "Yes" : "No");
+        
+    return result ;
+    }
+}
+class ElectricCar extends Car {
+    private double batteryCapacity; // in kWh
+    private double rangePerCharge; // in miles
+ //create new variables and then all the methods needed to use them also modify to string
+    public ElectricCar(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG, double inBatteryCapacity, double inRangePerCharge) {
+        super(inBrand, inSpeed, inPassengers, inCargo, inMPG);//uses the super constructor  
+        this.batteryCapacity = inBatteryCapacity;
+        this.rangePerCharge = inRangePerCharge;
+    }
+
+    public double getBatteryCapacity() {
+        return batteryCapacity;
+    }
+
+    public void setBatteryCapacity(double batteryCapacity) {
+        this.batteryCapacity = batteryCapacity;
+    }
+
+    public double getRangePerCharge() {
+        return rangePerCharge;
+    }
+
+    public void setRangePerCharge(double rangePerCharge) {
+        this.rangePerCharge = rangePerCharge;
+    }
+    //to string method
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nBattery Capacity: \t" + batteryCapacity + " kWh" +
+                "\nRange per Charge: \t" + rangePerCharge + " miles";
+    }
+}
+class Boat extends Vehicle {
+    private String hullType;
+    private double length; // in feet
+ //create new variables and then all the methods needed to use them also modify to string
+    public Boat(String inBrand, double inSpeed, int inPassengers, double inCargo, String inHullType, double inLength) {
+        super(inBrand, inSpeed, inPassengers, inCargo);//uses the super constructor  
+        this.hullType = inHullType;
+        this.length = inLength;
+    }
+
+    public String getHullType() {
+        return hullType;
+    }
+
+    public void setHullType(String hullType) {
+        this.hullType = hullType;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+//to string method
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nHull Type: \t" + hullType +
+                "\nLength: \t" + length + " feet";
+    }
+}    
+class Sailboat extends Boat {
+    private double sailArea; // in square feet
+    //add sail area and necessary methods
+    public Sailboat(String inBrand, double inSpeed, int inPassengers, double inCargo, String inHullType, double inLength, double inSailArea) {
+        super(inBrand, inSpeed, inPassengers, inCargo, inHullType, inLength);//uses the super constructor  
+        this.sailArea = inSailArea;
+    }
+
+    public double getSailArea() {
+        return sailArea;
+    }
+
+    public void setSailArea(double sailArea) {
+        this.sailArea = sailArea;
+    }
+    @Override
+     public double getSpeed() {
+        if (sailArea >= 150)
+            return super.getSpeed() + 30;
+        else
+            return super.getSpeed();
+    }
+     //to string method
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nSail Area: \t" + sailArea + " sq ft";
+    }
+}
+
+// Airplane class inherits from Vehicle
+class Airplane extends Vehicle {
+    private double wingspan; // in feet
+    private double range; // in miles
+    //add wingspan and range variales and the necessary methods
+    public Airplane(String inBrand, double inSpeed, int inPassengers, double inCargo, double inWingspan, double inRange) {
+        super(inBrand, inSpeed, inPassengers, inCargo);//uses the super constructor  
+        this.wingspan = inWingspan;
+        this.range = inRange;
+    }
+
+    public double getWingspan() {
+        return wingspan;
+    }
+
+    public void setWingspan(double wingspan) {
+        this.wingspan = wingspan;
+    }
+
+    public double getRange() {
+        return range;
+    }
+
+    public void setRange(double range) {
+        this.range = range;
+    }
+///to string method
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nWingspan: \t" + wingspan + " feet" +
+                "\nRange: \t" + range + " miles";
+    }
+}
+///Jet class inherits from Airplane
+class Jet extends Airplane {
+    private double thrust; // in pounds-force
+ //create new variables and then all the methods needed to use them also modify to string
+    public Jet(String inBrand, double inSpeed, int inPassengers, double inCargo, double inWingspan, double inRange, double inThrust) {
+        super(inBrand, inSpeed, inPassengers, inCargo, inWingspan, inRange);//uses the super constructor  
+        this.thrust = inThrust;
+    }
+
+    public double getThrust() {
+        return thrust;
+    }
+
+    public void setThrust(double thrust) {
+        this.thrust = thrust;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nThrust: \t" + thrust + " lbf";
+    }
+}
+///Hovercraft class inherits from Vehicle
+class Hovercraft extends Vehicle {
+    private double cushionHeight; // in inches
+ //create new variables and then all the methods needed to use them also modify to string
+    public Hovercraft(String inBrand, double inSpeed, int inPassengers, double inCargo, double inCushionHeight) {
+        super(inBrand, inSpeed, inPassengers, inCargo);//uses the super constructor  
+        this.cushionHeight = inCushionHeight;
+    }
+
+    public double getCushionHeight() {
+        return cushionHeight;
+    }
+
+    public void setCushionHeight(double cushionHeight) {
+        this.cushionHeight = cushionHeight;
+    }
+///to string method
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nCushion Height: \t" + cushionHeight + " inches";
+    }
+}
+///Spaceship class inherits from Vehicle
+class Spaceship extends Vehicle {
+    private String fuelType;
+    private double maxAltitude; // in miles
+    private boolean warpCapability;
+    //create new variables and then all the methods needed to use them also modify to string
+    public Spaceship(String inBrand, double inSpeed, int inPassengers, double inCargo, String inFuelType, double inMaxAltitude, boolean inWarpCapability) {
+        super(inBrand, inSpeed, inPassengers, inCargo);//uses the super constructor  
+        this.fuelType = inFuelType;
+        this.maxAltitude = inMaxAltitude;
+        this.warpCapability = inWarpCapability;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public double getMaxAltitude() {
+        return maxAltitude;
+    }
+
+    public void setMaxAltitude(double maxAltitude) {
+        this.maxAltitude = maxAltitude;
+    }
+
+    public boolean hasWarpCapability() {
+        return warpCapability;
+    }
+
+    public void setWarpCapability(boolean warpCapability) {
+        this.warpCapability = warpCapability;
+    }
+///to string method
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nFuel Type: \t" + fuelType +
+                "\nMax Altitude: \t" + maxAltitude + " miles" +
+                "\nWarp Capable: \t" + (warpCapability ? "Yes" : "No");
+    }
+}
+
