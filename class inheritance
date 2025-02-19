@@ -20,7 +20,7 @@ public class ClassInheritance {
         System.out.println(t.toString());
         Jet y = new Jet("Boeing", 10000, 2, 50, 100, 30000, 3000);
         System.out.println(y.toString());
-        Spaceship p = new Spaceship("YRHE", 1000000, 300, 30000, "Quantum", 45, true);
+        Spaceship p = new Spaceship("YRHE", 1000000, 300, 30000, "Quantum", 4000005000, true);
         System.out.println(p.toString());
     }
 }
