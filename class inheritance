@@ -7,9 +7,21 @@ create classes from the base vehicle and car class
 public class ClassInheritance {
 
     public static void main(String[] args) {
+        ElectricCar d = new ElectricCar("Lexus", 100, 2, 45, 16, 300, 50);
+        System.out.println(d.toString());
         AmphibiousCar bob = new  AmphibiousCar("joe", 130, 2, 4, 18, 4);
         bob.setWaterMode(true);    
         System.out.println(bob.toString());
+        Boat c = new Boat("Hyer", 2, 60, 470, "long", 500);
+        System.out.println(c.toString());
+        Sailboat e = new Sailboat("Flying Dutchman" , 50, 500, 6000, "wood", 400, 500);
+        System.out.println(e.toString());
+        Airplane t = new Airplane("Boeing", 4000, 100, 4000, 200, 10000);
+        System.out.println(t.toString());
+        Jet y = new Jet("Boeing", 10000, 2, 50, 100, 30000, 3000);
+        System.out.println(y.toString());
+        Spaceship p = new Spaceship("YRHE", 1000000, 300, 30000, "Quantum", 45, true);
+        System.out.println(p.toString());
     }
 }
 // The Base Vehicle Class, implements the Speedometer interface
@@ -67,7 +79,7 @@ class Vehicle implements Speedometer{
         result = "Brand: \t\t" + getBrand() + "\n" +
         "Speed (mph): \t" + getSpeed() + "\n" +
         "Passengers: \t" + getPassengers() + "\n" +
-        "Cargo (lbs): \t" + getCargoWeight() + "\n";
+        "Cargo (lbs): \t" + getCargoWeight();
     return result;
     }
 }
@@ -118,7 +130,7 @@ class Car extends Vehicle{
     //usesd the super toString, as well as addingnthe new variable to it.
     public String toString(){
         String result = super.toString() +
-            "MPG :\t\t" + this.getMPG();
+            "\nMPG :\t\t" + this.getMPG()  ;
     return result ;
     }
 }
@@ -172,7 +184,7 @@ class AmphibiousCar extends Car {
         String result = super.toString() +
             "\nPropellers :\t" + this.getPropellers() + 
                 "\nWater Mode :\t" + (waterMode ? "Yes" : "No") + 
-                "\nSleek Hull : \t" + (sleekHull ? "Yes" : "No");
+                "\nSleek Hull : \t" + (sleekHull ? "Yes" : "No") + "\n";
         
     return result ;
     }
@@ -207,7 +219,7 @@ class ElectricCar extends Car {
     public String toString() {
         return super.toString() +
                 "\nBattery Capacity: \t" + batteryCapacity + " kWh" +
-                "\nRange per Charge: \t" + rangePerCharge + " miles";
+                "\nRange per Charge: \t" + rangePerCharge + " miles" + "\n";
     }
 }
 class Boat extends Vehicle {
@@ -240,7 +252,7 @@ class Boat extends Vehicle {
     public String toString() {
         return super.toString() +
                 "\nHull Type: \t" + hullType +
-                "\nLength: \t" + length + " feet";
+                "\nLength: \t" + length + " feet" + "\n";
     }
 }    
 class Sailboat extends Boat {
@@ -269,7 +281,7 @@ class Sailboat extends Boat {
     @Override
     public String toString() {
         return super.toString() +
-                "\nSail Area: \t" + sailArea + " sq ft";
+                "\nSail Area: \t" + sailArea + " sq ft" + "\n";
     }
 }
 
@@ -304,7 +316,7 @@ class Airplane extends Vehicle {
     public String toString() {
         return super.toString() +
                 "\nWingspan: \t" + wingspan + " feet" +
-                "\nRange: \t" + range + " miles";
+                "\nRange: \t\t" + range + " miles" + "\n";
     }
 }
 ///Jet class inherits from Airplane
@@ -327,7 +339,7 @@ class Jet extends Airplane {
     @Override
     public String toString() {
         return super.toString() +
-                "\nThrust: \t" + thrust + " lbf";
+                "\nThrust: \t" + thrust + " lbf" + "\n";
     }
 }
 ///Hovercraft class inherits from Vehicle
@@ -350,7 +362,7 @@ class Hovercraft extends Vehicle {
     @Override
     public String toString() {
         return super.toString() +
-                "\nCushion Height: \t" + cushionHeight + " inches";
+                "\nCushion Height: \t" + cushionHeight + " inches" + "\n";
     }
 }
 ///Spaceship class inherits from Vehicle
@@ -395,7 +407,10 @@ class Spaceship extends Vehicle {
         return super.toString() +
                 "\nFuel Type: \t" + fuelType +
                 "\nMax Altitude: \t" + maxAltitude + " miles" +
-                "\nWarp Capable: \t" + (warpCapability ? "Yes" : "No");
+                "\nWarp Capable: \t" + (warpCapability ? "Yes" : "No") + "\n";
     }
+}
+
+
 }
 
