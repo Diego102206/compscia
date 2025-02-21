@@ -1,62 +1,171 @@
-package com.mycompany.unit4test;
+package com.mycompany.fortnite;
 
 /**
  *
  * @author dpereira2025
- * Use class to create card objects and then put these objects onto a string using a string builder.
- * random numbers will be used to get random values and suits
- * Since I wasn't able to get the highest card and the not overlapping cards, if I had more time i would have tried doing an array list instead so that I could access all of the things and not have them all stuck in one big string but I ran out of time to change everything
  */
 import java.util.*;
-public class Unit4Test {
-    
+public class Fortnite {
+
     public static void main(String[] args) {
-        StringBuilder hand = new StringBuilder(); //string builder
-        Random r = new Random(); //random generator
-        int cards = 0; 
-        //while statemtnt for producing 5 cards
-            while (cards < 5){
-                cards++;
-                String suit = null;
-                int suitNum = r.nextInt(4) + 1;
-                switch (suitNum) { //switch to turn random numbers into suit strings
-            case 1:
-                suit = "Clubs";
-                break;
-            case 2:
-                suit = "Hearts";
-                break;
-            case 3:
-                suit = "Spades";
-                break;
-            case 4:
-                suit = "Diamonds";
-                break;
-            default:
-                break;
+       Random r = new Random();
+       Scanner scan = new Scanner(System.in);
+       System.out.println("Welcome to Fortnite!\nIn this game you have to land, loot, and survive the seven circles, fighting your way to survive");
+       Weapon scar = new Weapon( "", "Scar", 30, 40);
+       Weapon pNinety = new Weapon("", "P90", 22, 15);
+       Weapon sniper = new Weapon("", "Sniper", 200, 20);
+       Weapon zapatron = new Weapon("", "Zapatron", 250, 100);
+       Weapon pumpShotgun = new Weapon("", "Pump Shotgun", 150, 25);
+       Weapon smg = new Weapon("", "Smg", 20, 5);
+       Heal pot = new Heal("rare","Big Pot", 0, 50);
+       Heal mini = new Heal("uncommon","Mini", 0, 25);
+       Heal bandage = new Heal("common","Bandage", 15, 0);
+       Heal meddy = new Heal("uncommon","Medkit", 100, 0);
+       Heal slurp = new Heal("rare","Slurp Juice", 0, 75);
+       Heal chug = new Heal("rare","Chug Jug", 100, 100);
+       
+       Players player = new Players(100,100);
+       player.addWeapon(sniper);
+       System.out.println(player.getInventory());
+       System.out.println(smg.toString());
+            System.out.println("if choose tilted press 1 if moisty 2 if salty 3");
+            int forty = 0;
+            while (forty == 0){  
+                String input = scan.nextLine();
+                if (input.equalsIgnoreCase("1")){
+                    forty = 1;
+                    
+                } else if (input.equalsIgnoreCase("2")) {
+                    forty = 1;
+                    
+                } else if (input.equalsIgnoreCase("3")) {
+                    forty = 1;
+                    
+                } else { 
+                    System.out.println("Invalid input please try again.");
                 }
-                Card newCard = new Card(suit,r.nextInt(13) + 1);
-                //appending string to add card
-                hand.append("Value: " + newCard.getVal() + " Suit: " + newCard.getSuit() + "\n");
-            } 
-            //printing 
-                System.out.println("Your hand:\n" + hand);
+            }
+    
+    
     }
 }
-class Card{//card class
-    String suit = "n";
-    int valFace ;
-    int suitNum ;
-    //creator
-        public Card(String suit, int valFace){
-        this.suit = suit;
-        this.valFace = valFace;
+class Item{
+    String name;
+    String rarity = "";
+    public Item (String inRarity, String inName){
+        name = inName;
+    }   
+    public String getRarity(){
+        return rarity;
     }
-    //getters
-    public String getSuit(){
-        return suit;
+    public void setBrandName(String inRarity){
+        rarity = inRarity;
     }
-    public int getVal(){
-        return valFace;
+    
+}
+class Weapon extends Item{
+    double damage = 0;
+    int accuracy = 0;
+   String[] rars = {"common", "uncommon", "rare", "epic", "legendary", "mythic"};
+    public Weapon(String inRarity, String inName, double inDamage, int inAccuracy){
+            super(inRarity, inName);
+             Random r = new Random();
+             rarity = rars[r.nextInt(4)];
+            double i = 0;
+        if (rarity.equalsIgnoreCase("common")){
+        i = 0.75;
+    } else if (rarity.equalsIgnoreCase("uncommon")){
+        i = 0.9;
+    } else if (rarity.equalsIgnoreCase("rare")){
+        i = 1;
+    } else if (rarity.equalsIgnoreCase("epic")){
+        i = 1.1;    
+    } else if (rarity.equalsIgnoreCase("legendary")){
+        i = 1.2 ; 
+    } else if (rarity.equalsIgnoreCase("mythic")){
+        i = 1.25;    
     }
+            damage = inDamage * i;
+            accuracy = inAccuracy;
+                    }
+    public double getDamage(){
+        return damage;
+    }
+    public void setDamage(int inDamage){
+        damage = inDamage;
+    }
+     public int getAccuracy(){
+        return accuracy;
+    }
+    public void setAccuracy(int inAccuracy){
+        accuracy = inAccuracy;
+    }
+    public String toString(){
+        String i = "Weapon: " + name + "\nRarity: " + rarity + "\nDamage: " + damage + "\nAccuracy: " + accuracy;
+        return i;
+    }
+}
+
+class Heal extends Item{
+    int healing; 
+    int shield;   
+    public Heal(String inRarity, String inName, int inHealing, int inShield){
+            super(inRarity, inName);
+            healing = inHealing;
+            shield = inShield;
+                    }
+      public int getHealing(){
+        return healing;
+    }
+    public void setHealing(int inHealing){
+        healing = inHealing;
+    }
+      public int getShield(){
+        return shield;
+    }
+    public void setShield(int inShield){
+        shield = inShield;
+    }
+    public String toString(){
+        String i = "Heal: " + name + "\nRarity: " + rarity + "\nHealing: " + healing + "\nShield: " + shield;
+        return i;
+    }
+}
+class Players{
+    double health = 100;
+    double sheild = 0;
+    Weapon[] invWeapon; 
+    public Players(double inHealth, double inSheild){
+        health = inHealth;
+        sheild = inSheild;
+    }
+      public double getHealth(){
+        return health;
+    }
+    public void setHealth(double inHealth){
+        health = inHealth;
+    }
+    public double getSheild(){
+        return sheild;
+    }
+    public void setSheild(double inSheild){
+        sheild = inSheild;
+    }
+    public void addWeapon(Weapon newWeapon){
+        invWeapon = new Weapon[1];
+        invWeapon[0] = newWeapon;
+    }
+    public String getInventory(){
+        return invWeapon[0].toString();
+    }
+     public double getDamage(){
+        return invWeapon[0].damage;
+    }
+     public int getAccuracy(){
+        return invWeapon[0].accuracy;
+    }
+    
+    
+    
+  
 }
