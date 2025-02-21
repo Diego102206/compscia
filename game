@@ -8,25 +8,28 @@ import java.util.*;
 public class Fortnite {
 
     public static void main(String[] args) {
+       Random r = new Random();
        System.out.println("Welcome to Fortnite!\nIn this game you have to land, loot, and survive the seven circles, fighting your way to survive");
-       Weapon Scar = new Weapon("Legendary", 30, 40);
-       Weapon Pninety = new Weapon("Legendary", 20, 50);
-       Weapon Sniper = new Weapon("Rare", 200, 5);
-       Weapon Zapatron = new Weapon("Mythic", 250, 100);
-       Weapon PumpShotgun = new Weapon("Rare", 150, 25);
-       Weapon Smg = new Weapon("Rare", 200, 5);
-   
+       Weapon scar = new Weapon( "", "Scar", 30, 40);
+       Weapon pNinety = new Weapon("", "P90", 22, 15);
+       Weapon sniper = new Weapon("", "Sniper", 200, 20);
+       Weapon zapatron = new Weapon("", "Zapatron", 250, 100);
+       Weapon pumpShotgun = new Weapon("", "Pump Shotgun", 150, 25);
+       Weapon smg = new Weapon("", "Smg", 20, 5);
+       System.out.println(smg.toString());
     
     
     
     }
 }
 class Item{
+    String name;
     String rarity = "";
     String[] rars = {"common", "uncommon", "rare", "epic", "legendary", "mythic"};
-    public Item (String inRarity){
+    public Item (String inRarity, String inName){
         Random r = new Random();
         rarity = rars[r.nextInt(4)];
+        name = inName;
     }   
     public String getRarity(){
         return rarity;
@@ -34,16 +37,32 @@ class Item{
     public void setBrandName(String inRarity){
         rarity = inRarity;
     }
+    
 }
 class Weapon extends Item{
-    int damage = 0;
+    double damage = 0;
     int accuracy = 0;
-    public Weapon(String inRarity, int inDamage, int inAccuracy){
-            super(inRarity);
-            damage = inDamage;
+   
+    public Weapon(String inRarity, String inName, double inDamage, int inAccuracy){
+            super(inRarity, inName);
+            double i = 0;
+        if (rarity.equalsIgnoreCase("common")){
+        i = 0.75;
+    } else if (rarity.equalsIgnoreCase("uncommon")){
+        i = 0.9;
+    } else if (rarity.equalsIgnoreCase("rare")){
+        i = 1;
+    } else if (rarity.equalsIgnoreCase("epic")){
+        i = 1.1;    
+    } else if (rarity.equalsIgnoreCase("legendary")){
+        i = 1.2 ; 
+    } else if (rarity.equalsIgnoreCase("mythic")){
+        i = 1.25;    
+    }
+            damage = inDamage * i;
             accuracy = inAccuracy;
                     }
-    public int getDamage(){
+    public double getDamage(){
         return damage;
     }
     public void setDamage(int inDamage){
@@ -55,18 +74,26 @@ class Weapon extends Item{
     public void setAccuracy(int inAccuracy){
         accuracy = inAccuracy;
     }
-    public toString
+    public String toString(){
+        String i = "Weapon: " + name + "\nRarity: " + rarity + "\nDamage: " + damage + "\nAccuracy: " + accuracy;
+        return i;
+    }
 }
 
 class Heal extends Item{
     int healing; 
     int shield;   
-    public Heal(String inRarity, int inHealing, int inShield){
-            super(inRarity);
+    public Heal(String inRarity, String inName, int inHealing, int inShield){
+            super(inRarity, inName);
             healing = inHealing;
             shield = inShield;
                     }
 }
 class Players{
-    
+    double health = 100;
+    double sheild = 0;
+    public Players(double inHealth, double inSheild){
+        health = inHealth;
+        sheild = inSheild;
+    }
 }
