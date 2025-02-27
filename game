@@ -5,6 +5,7 @@ package com.mycompany.fortnite;
  * @author dpereira2025
  */
 import java.util.*;
+import java.math.*;
 public class Fortnite {
 
     public static void main(String[] args) {
@@ -12,12 +13,12 @@ public class Fortnite {
        int rWe;
        Scanner scan = new Scanner(System.in);
        System.out.println("Welcome to Fortnite!\nIn this game you have to land, loot, and survive the seven circles, fighting your way to survive");
-       Weapon scar = new Weapon( "", "Scar", 30, 40);
-       Weapon pNinety = new Weapon("", "P90", 22, 15);
-       Weapon sniper = new Weapon("", "Sniper", 200, 20);
+       Weapon scar = new Weapon( "", "Scar", 40, 25);
+       Weapon pNinety = new Weapon("", "P90", 22, 20);
+       Weapon sniper = new Weapon("", "Sniper", 200, 2);
        Weapon zapatron = new Weapon("", "Zapatron", 250, 100);
-       Weapon pumpShotgun = new Weapon("", "Pump Shotgun", 150, 25);
-       Weapon smg = new Weapon("", "Smg", 20, 5);
+       Weapon pumpShotgun = new Weapon("", "Pump Shotgun", 150, 10);
+       Weapon smg = new Weapon("", "Smg", 20, 15);
        Heal pot = new Heal("rare","Big Pot", 0, 50);
        Heal mini = new Heal("uncommon","Mini", 0, 25);
        Heal bandage = new Heal("common","Bandage", 15, 0);
@@ -26,11 +27,7 @@ public class Fortnite {
        Heal chug = new Heal("LEGENDARY","Chug Jug", 100, 100);
        Heal none = new Heal("N/A", "N/A", 0, 0);
        
-       Player player = new Player(100,100);
-       player.addWeapon(sniper);
-       player.addHeal(chug);
-       System.out.println(player.getInventory());
-       
+       Player player = new Player(100, 0);       
             System.out.println("if choose tilted press 1 if moisty 2 if salty 3");
             int forty = 0;
             while (forty == 0){  
@@ -194,29 +191,185 @@ public class Fortnite {
                 } else { 
                     System.out.println("Invalid input please try again.");
                 }
+                System.out.println("YOU:" +  player.toString());
             Character enemy1 = new Character(rWe = r.nextInt(100)+1, rWe = r.nextInt(100)+1);
-            System.out.println("you see an enemy and engage in battle\nYou can either heal or attack but you can only use your healing once.\ntype heal to heal, and attack to attack");
-            String input2 = scan.nextLine(); 
             while (player.getHealth() > 0 && enemy1.getHealth() > 0){
-            if (input2.equalsIgnoreCase("Attack")) {
-                            enemy1.setHealth(enemy1.getHealth() - player.getDamage());
-                            player.setHealth(player.getHealth() - r.nextInt(100));
+                System.out.println("you see an enemy and engage in battle\nYou can either heal or attack but you can only use your healing once.\ntype heal to heal, and attack to attack");
+                
+                String input2 = scan.nextLine();
+                if (input2.equalsIgnoreCase("Attack")) {
+                            double dam = player.getDamage();
+                            double enemyHealth = enemy1.getHealth() + enemy1.getSheild();
+                            enemyHealth = enemyHealth - dam;                            
+                            if (enemyHealth > 100){
+                                enemy1.setHealth(100);
+                                enemy1.setSheild(enemyHealth - 100);               
+                            } else {
+                                enemy1.setHealth(enemyHealth);
+                                enemy1.setSheild(0);
+                            }
+                            System.out.println("Damage done: " + dam);
+                            double playerHealth = player.getHealth() + player.getSheild();
+                            playerHealth = playerHealth - r.nextInt(40);                            
+                            if (playerHealth > 100){
+                                player.setHealth(100);
+                                player.setSheild(playerHealth - 100);               
+                            } else {
+                                player.setHealth(playerHealth);
+                                 player.setSheild(0);
+                            }
+                            
+                            
+                          
                     //heal if statement, change health by healing random number
                         } else if (input2.equalsIgnoreCase("Heal")) {
-                            enemy1.setHealth(enemy1.getHealth() + r.nextInt(20));
-                            enemy1.setSheild(enemy1.getSheild() + r.nextInt(20));
+                            enemy1.setHealth(enemy1.getHealth() + r.nextInt(50));
+                            enemy1.setSheild(enemy1.getSheild() + r.nextInt(50));
                             player.setHealth(player.getHealth() + player.getHealing());
                             player.setSheild(player.getSheild() + player.getSheilding());
                             player.addHeal(none);
-                        }  
+                            if (player.getHealth() > 100){
+                                player.setHealth(100);                                           
+                            }  
+                             if (player.getSheild() > 100){
+                                player.setSheild(100);                                           
+                            }  
+                             if (enemy1.getHealth() > 100){
+                                enemy1.setHealth(100);                                           
+                            }  
+                             if (enemy1.getSheild() > 100){
+                                enemy1.setSheild(100);                                           
+                            }  
+                        }    
+                System.out.println("YOU:" +  player.toString() + "ENEMY" + enemy1.toString());
             }
             
             if (player.getHealth() <= 0){
                     System.out.println("You were DEFEATED!! :( ");
             } else if (enemy1.getHealth() <= 0){
                     System.out.println("You WON!! :) ");
+                    System.out.println("you survived the first circle and it is now closing, you loot up a little more");
+                    rWe = r.nextInt(100)+1;
+                    if (rWe <= 1){                      
+                        System.out.println("You Found: \n" + zapatron.toString() + "\nWould you like to pick up this weapon and get rid of your old one:" + player.getInventory() + "\nPress 1 to pick it up and anything else to keep your current weapon.");
+                        String input3 = scan.nextLine();
+                        if (input3.equalsIgnoreCase("1"))
+                        player.addWeapon(zapatron);                        
+                    } else if (rWe > 1 && rWe <= 5){                        
+                        System.out.println("You Found: \n" + scar.toString() + "\nWould you like to pick up this weapon and get rid of your old one:" + player.getInventory() + "\nPress 1 to pick it up and anything else to keep your current weapon.");
+                         String input3 = scan.nextLine();
+                        if (input3.equalsIgnoreCase("1"))
+                        player.addWeapon(scar);
+                    } else if (rWe > 5 && rWe <= 15){                        
+                        System.out.println("You Found: \n" + pNinety.toString() + "\nWould you like to pick up this weapon and get rid of your old one:" + player.getInventory() + "\nPress 1 to pick it up and anything else to keep your current weapon.");
+                         String input3 = scan.nextLine();
+                        if (input3.equalsIgnoreCase("1"))
+                        player.addWeapon(pNinety);
+                    } else if (rWe > 15 && rWe <= 35){                       
+                        System.out.println("You Found: \n" + sniper.toString() + "\nWould you like to pick up this weapon and get rid of your old one:" + player.getInventory() + "\nPress 1 to pick it up and anything else to keep your current weapon.");
+                         String input3 = scan.nextLine();
+                        if (input3.equalsIgnoreCase("1"))
+                         player.addWeapon(sniper);
+                    } else if (rWe > 35 && rWe <= 65) {                        
+                        System.out.println("You Found: \n" + pumpShotgun.toString() + "\nWould you like to pick up this weapon and get rid of your old one:" + player.getInventory() + "\nPress 1 to pick it up and anything else to keep your current weapon.");
+                         String input3 = scan.nextLine();
+                        if (input3.equalsIgnoreCase("1"))
+                        player.addWeapon(pumpShotgun);
+                    } else if (rWe > 65 && rWe <= 100) {                       
+                        System.out.println("You Found: \n" + smg.toString() + "\nWould you like to pick up this weapon and get rid of your old one:" + player.getInventory() + "\nPress 1 to pick it up and anything else to keep your current weapon.");
+                         String input3 = scan.nextLine();
+                        if (input3.equalsIgnoreCase("1"))
+                        player.addWeapon(smg);
+                    }
+                    System.out.println("you find a new healing item and use your old one to make room for it");
+                    rWe = r.nextInt(100)+1;
+                    if (rWe <= 1){
+                        player.addHeal(chug);
+                       player.setHealth(player.getHealth() + player.getHealing());
+                            player.setSheild(player.getSheild() + player.getSheilding());
+                            player.addHeal(none);
+                            if (player.getHealth() > 100){
+                                player.setHealth(100);                                           
+                            }  
+                             if (player.getSheild() > 100){
+                                player.setSheild(100);                                           
+                            }  
+                             
+                        System.out.println(chug.toString());
+                        
+                    } else if (rWe > 1 && rWe <= 5){
+                        player.addHeal(slurp);
+                        player.setHealth(player.getHealth() + player.getHealing());
+                            player.setSheild(player.getSheild() + player.getSheilding());
+                            player.addHeal(none);
+                            if (player.getHealth() > 100){
+                                player.setHealth(100);                                           
+                            }  
+                             if (player.getSheild() > 100){
+                                player.setSheild(100);                                           
+                            }  
+                            
+                        System.out.println(slurp.toString());
+                        
+                    } else if (rWe > 5 && rWe <= 15){
+                        player.addHeal(pot);
+                        player.setHealth(player.getHealth() + player.getHealing());
+                            player.setSheild(player.getSheild() + player.getSheilding());
+                            player.addHeal(none);
+                            if (player.getHealth() > 100){
+                                player.setHealth(100);                                           
+                            }  
+                             if (player.getSheild() > 100){
+                                player.setSheild(100);                                           
+                            }  
+                             
+                        System.out.println(pot.toString());
+                        
+                    } else if (rWe > 15 && rWe <= 35){
+                        player.addHeal(meddy);
+                        player.setHealth(player.getHealth() + player.getHealing());
+                            player.setSheild(player.getSheild() + player.getSheilding());
+                            player.addHeal(none);
+                            if (player.getHealth() > 100){
+                                player.setHealth(100);                                           
+                            }  
+                             if (player.getSheild() > 100){
+                                player.setSheild(100);                                           
+                            }  
+                            
+                        System.out.println(meddy.toString());
+                        
+                    } else if (rWe > 35 && rWe <= 65) {
+                        player.addHeal(mini);
+                        player.setHealth(player.getHealth() + player.getHealing());
+                            player.setSheild(player.getSheild() + player.getSheilding());
+                            player.addHeal(none);
+                            if (player.getHealth() > 100){
+                                player.setHealth(100);                                           
+                            }  
+                             if (player.getSheild() > 100){
+                                player.setSheild(100);                                           
+                            }  
+                             
+                        System.out.println(mini.toString());
+                        
+                    } else if (rWe > 65 && rWe <= 100) {
+                        player.addHeal(bandage);
+                        player.setHealth(player.getHealth() + player.getHealing());
+                            player.setSheild(player.getSheild() + player.getSheilding());
+                            player.addHeal(none);
+                            if (player.getHealth() > 100){
+                                player.setHealth(100);                                           
+                            }  
+                             if (player.getSheild() > 100){
+                                player.setSheild(100);                                           
+                            }  
+                            
+                        System.out.println(bandage.toString());
+                    }
+                            
             } 
-    
+            
     
         }
     }
@@ -231,7 +384,7 @@ class Item{
     public String getRarity(){
         return rarity;
     }
-    public void setBrandName(String inRarity){
+    public void setRarity(String inRarity){
         rarity = inRarity;
     }
     
@@ -239,6 +392,7 @@ class Item{
 class Weapon extends Item{
     double damage = 0;
     int accuracy = 0;
+    
    String[] rars = {"common", "uncommon", "rare", "epic", "LEGENDARY", "MYTHIC"};
     public Weapon(String inRarity, String inName, double inDamage, int inAccuracy){
             super(inRarity, inName);
@@ -262,7 +416,8 @@ class Weapon extends Item{
             accuracy = inAccuracy;
                     }
     public double getDamage(){
-        return damage;
+        Random r = new Random();
+        return Math.round(r.nextDouble(damage) + accuracy);
     }
     public void setDamage(int inDamage){
         damage = inDamage;
@@ -323,6 +478,9 @@ class Character{
     public void setSheild(double inSheild){
         sheild = inSheild;
     }
+    public String toString(){
+        return "----------------" + "\nHealth: " + health + "\nSheild: " + sheild + "\n";
+    }
 }
 class Player extends Character {
     Weapon[] invWeapon; 
@@ -338,7 +496,7 @@ class Player extends Character {
         return invWeapon[0].toString() + "\n" + invHeal[0].toString();
     }
     public double getDamage(){
-        return invWeapon[0].damage;
+        return invWeapon[0].getDamage();
     }
     public int getAccuracy(){
         return invWeapon[0].accuracy;
@@ -352,7 +510,7 @@ class Player extends Character {
     }
     public int getSheilding(){
         return invHeal[0].shield;
-    }
+    }    
 }    
     
     
