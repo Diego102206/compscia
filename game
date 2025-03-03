@@ -1484,6 +1484,7 @@ public class Fortnite {
         }
     }
 }
+//initial class item tfor rarity and name
 class Item{
     String name;
     String rarity = "";
@@ -1499,6 +1500,7 @@ class Item{
     }
     
 }
+//weapon class extends item and adds damage and accuracy. also methods for different rarity system and damage
 class Weapon extends Item{
     double damage = 0;
     int accuracy = 0;
@@ -1543,7 +1545,7 @@ class Weapon extends Item{
         return i;
     }
 }
-
+//ectends item, addas healing and sheild methods and variables
 class Heal extends Item{
     int healing; 
     int shield;   
@@ -1569,6 +1571,7 @@ class Heal extends Item{
         return i;
     }
 }
+//base calss with just health and sheild.
 class Character{
     double health = 100;
     double sheild = 0;
@@ -1592,6 +1595,7 @@ class Character{
         return "----------------" + "\nHealth: " + health + "\nSheild: " + sheild + "\n";
     }
 }
+//player class extends character with new inventory methods for weapons and heals
 class Player extends Character {
     Weapon[] invWeapon; 
     Heal[] invHeal;
@@ -1622,7 +1626,6 @@ class Player extends Character {
         return invHeal[0].shield;
     }    
 }    
-    
     
     
   
