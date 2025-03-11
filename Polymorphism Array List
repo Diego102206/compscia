@@ -1,0 +1,70 @@
+package com.mycompany.polymorphismarraylist;
+
+/**
+ *
+ * @author dpereira2025
+ */
+import java.util.*;
+public class PolymorphismArrayList {
+
+    public static void main(String[] args) {
+     ArrayList<Aircraft> a = new ArrayList<Aircraft>(); 
+     Aircraft airC = new Aircraft(2);
+     a.add(airC);
+     Aircraft singeleEP = new SingleEnginePlane(4, "Johnson 350");
+     a.add(singeleEP);
+     Aircraft heli = new Helicopter(0, "Davidson 17", 6);
+     a.add(heli);
+     System.out.println(a);
+    }
+}
+class Aircraft{
+    int wings = 0;
+    public Aircraft(int inWings){
+        wings = inWings;
+    }
+    public int getWings(){
+        return wings;
+    }
+    public void setWings(int inWings){
+        wings = inWings;
+    }
+    public String toString(){
+        return "This aircraft has: \nWings: " + wings;
+    }
+}
+class SingleEnginePlane extends Aircraft{
+    String rotaryEngine;
+    public SingleEnginePlane(int inWings, String inRotaryEngine){
+        super(inWings);
+        rotaryEngine = inRotaryEngine;
+    }
+    public String getRotaryEngine(){
+        return rotaryEngine;
+    }
+    public void setRotaryEngine(String inRotaryEngine){
+        rotaryEngine = inRotaryEngine;
+    }
+    @Override
+     public String toString(){
+        return "\n\nThis single engine plane has: \nWings: " + wings + "\nEngine: " + rotaryEngine;
+    }
+}
+class Helicopter extends SingleEnginePlane{
+    int blades;
+     public Helicopter(int inWings, String inRotaryEngine, int inBlades){
+        super(inWings, inRotaryEngine);
+        blades = inBlades;
+    }
+     public int getBlades(){
+        return blades;
+    }
+    public void setBlades(int inBlades){
+        blades = inBlades;
+    }
+     public String toString(){
+        return "\n\nThis single engine plane has: \nWings: " + wings + 
+                "\nEngine: " + rotaryEngine +
+                "\nBlades: " + blades;
+    }
+}
