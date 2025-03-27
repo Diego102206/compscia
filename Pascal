@@ -1,3 +1,9 @@
+package com.mycompany.pascaltrianglerecursive;
+
+/**
+ *
+ * @author dpereira2025
+ */
 import java.util.Scanner;
 
 public class PascalTriangleRecursive {
@@ -12,9 +18,9 @@ public class PascalTriangleRecursive {
 
     // Function to generate the nth row of Pascal's Triangle
     public static int[] pascalRow(int n) {
-        int[] row = new int[n + 1];
-        for (int k = 0; k <= n; k++) {
-            row[k] = binomialCoeff(n, k);
+        int[] row = new int[n];
+        for (int k = 0; k < n; k++) {
+            row[k] = binomialCoeff(n - 1, k);
         }
         return row;
     }
