@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class PascalTriangleRecursive {
+    
+    // Recursive function to calculate binomial coefficient C(n, k)
+    public static int binomialCoeff(int n, int k) {
+        if (k == 0 || k == n) {
+            return 1; // Base case: first and last elements are always 1
+        }
+        return binomialCoeff(n - 1, k - 1) + binomialCoeff(n - 1, k);
+    }
+
+    // Function to generate the nth row of Pascal's Triangle
+    public static int[] pascalRow(int n) {
+        int[] row = new int[n + 1];
+        for (int k = 0; k <= n; k++) {
+            row[k] = binomialCoeff(n, k);
+        }
+        return row;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the row number N: ");
+        int N = scanner.nextInt();
+        scanner.close();
+
+        int[] result = pascalRow(N);
+
+        System.out.print("Row " + N + " of Pascal's Triangle: ");
+        for (int num : result) {
+            System.out.print(num + " ");
+        }
+    }
+}
