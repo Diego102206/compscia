@@ -4,7 +4,7 @@ package com.mycompany.pascaltrianglerecursive;
  *
  * @author dpereira2025
  */
-import java.util.Scanner;
+import java.util.*;
 
 public class PascalTriangleRecursive {
     
