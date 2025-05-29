@@ -1,0 +1,213 @@
+package com.mycompany.loancalculatorgui;
+
+import javax.swing.*;
+import javax.sound.sampled.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+class LoanApplication {
+    private String name;
+    private double houseAmount;
+    private int creditScore;
+    private double loanAmount;
+    private double interestRate;
+
+    public LoanApplication(String name, double houseAmount, int creditScore, double loanAmount, double interestRate) {
+        this.name = name;
+        this.houseAmount = houseAmount;
+        this.creditScore = creditScore;
+        this.loanAmount = loanAmount;
+        this.interestRate = interestRate;
+    }
+
+    public String toCSV() {
+        return name + "," + houseAmount + "," + creditScore + "," + loanAmount + "," + interestRate;
+    }
+
+    public static LoanApplication fromCSV(String line) {
+        String[] parts = line.split(",");
+        return new LoanApplication(parts[0], Double.parseDouble(parts[1]), Integer.parseInt(parts[2]),
+                Double.parseDouble(parts[3]), Double.parseDouble(parts[4]));
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Loan: $" + loanAmount + ", Interest Rate: " + interestRate + "%" + "\n";
+    }
+}
+
+public class LoanCalculatorGui extends JFrame {
+    private JTextField nameField, amountField, creditScoreField;
+    private JTextArea resultArea;
+    private List<LoanApplication> applications = new ArrayList<>();
+    private static final String FILE_NAME = "loan_data.csv";
+       
+
+    public LoanCalculatorGui() {
+        
+        setTitle("Loan Calculator");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(6, 2));
+
+        add(new JLabel("Name:"));
+        nameField = new JTextField();
+        add(nameField);
+
+        add(new JLabel("House Amount ($):"));
+        amountField = new JTextField();
+        add(amountField);
+
+        add(new JLabel("Credit Score:"));
+        creditScoreField = new JTextField();
+        add(creditScoreField);
+
+        JButton calculateButton = new JButton("Calculate Loan");
+        add(calculateButton);
+
+        resultArea = new JTextArea(5, 30);
+        resultArea.setEditable(false);
+        add(new JScrollPane(resultArea));
+
+        JButton loadButton = new JButton("Load Previous Data");
+        add(loadButton);
+        
+         JButton delButton = new JButton("Delete Data");
+         add(delButton);
+
+        calculateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SoundClass t = new SoundClass();
+                t.createTimeForSound();
+                processLoanApplication();
+                
+            }
+        });
+
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadLoanData();
+            }
+        });
+        
+         delButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    deleteData();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoanCalculatorGui.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+         
+        setVisible(true);
+    }
+ 
+    private void deleteData() throws IOException{
+        try (FileWriter writer = new FileWriter(FILE_NAME,false)) {
+            writer.write("");
+           
+               
+                
+            }
+            
+    }
+    
+    
+    private void processLoanApplication() {
+        try {
+           
+            String name = nameField.getText();
+            double houseAmount = Double.parseDouble(amountField.getText());
+            int creditScore = Integer.parseInt(creditScoreField.getText());
+
+            double loanAmount = houseAmount * (creditScore >= 700 ? 0.9 : 0.75);
+            double interestRate = creditScore >= 700 ? 3.5 : 5.5;
+
+            LoanApplication application = new LoanApplication(name, houseAmount, creditScore, loanAmount, interestRate);
+            applications.add(application );
+            saveToCSV(application);
+            resultArea.setText("Loan Approved!\n" + application.toString());
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter valid numbers!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void saveToCSV(LoanApplication application) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+            writer.write(application.toCSV() + "\n");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error saving data!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void loadLoanData() {
+        applications.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                LoanApplication application = LoanApplication.fromCSV(line);
+                applications.add(application);
+            }
+            resultArea.setText("Loaded Data:\n" + applications);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "No data found!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public static void main(String[] args) {
+        new LoanCalculatorGui();
+    }
+}
+class SoundClass{
+    String filePath = "boing_spring.wav"; 
+
+    public static void playSound(String filePath) {
+        try {
+            File soundFile = new File(filePath);
+            AudioInputStream audioIn =
+            AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.setFramePosition(0);
+            System.out.println("Playing the sound");
+            clip.start();
+            // Keep the program running until the sound finishes playing
+            clip.addLineListener(event -> {
+                if (event.getType() == LineEvent.Type.STOP) {
+                    clip.close();
+                   
+            }
+        });
+    } catch (UnsupportedAudioFileException | IOException |
+    LineUnavailableException e) {
+        e.printStackTrace();
+        }
+    }
+    public void createTimeForSound() {
+        TimerTask task = new TimerTask() {
+        public void run() {
+        playSound(filePath);
+        
+        }
+    };
+        Timer timer = new Timer("Timer");
+                long delay = 10L;
+        timer.schedule(task, delay);
+    }
+    
+    
+}
+
